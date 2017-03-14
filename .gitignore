@@ -1,0 +1,12 @@
+venv/
+uploads/
+_old
+
+# Current files with data
+charge_list.csv
+current_report.rtf
+data_list.csv
+equip_charge_list.csv
+
+# compiled files
+*.pyc

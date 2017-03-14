@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+  var _validFileExtensions = [".zip"];    
+  function Validate(oForm) {
+      var arrInputs = oForm.getElementsByTagName("input");
+      for (var i = 0; i < arrInputs.length; i++) {
+          var oInput = arrInputs[i];
+          if (oInput.type == "file") {
+              var sFileName = oInput.value;
+              if (sFileName.length > 0) {
+                  var blnValid = false;
+                  for (var j = 0; j < _validFileExtensions.length; j++) {
+                      var sCurExtension = _validFileExtensions[j];
+                      if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                          blnValid = true;
+                          break;
+                      }
+                  }
+                
+                  if (!blnValid) {
+                      alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                      return false;
+                  }
+              }
+          }
+      }
+  
+      return true;
+  }
+  </script>
+  <head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Verizon Report Generator</h3>
+      </div>
+      <hr/>
+      <div>
+      
+      <form action="upload" method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
+        
+        <input type="file" name="file"><br /><br />
+        <input type="submit" value="Upload">
+      </form>
+      </div>
+    </div>
+  </body>
+</html>
+ 

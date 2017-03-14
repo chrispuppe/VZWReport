@@ -1,0 +1,4 @@
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-centos-7
+
+uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+
