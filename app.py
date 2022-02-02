@@ -6,7 +6,7 @@ import os.path
 # and send_from_directory will help us to send/show on the
 # browser the file that the user just uploaded
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, send_file
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 
 # Initialize the Flask application
 app = Flask(__name__, static_url_path='')
@@ -62,7 +62,7 @@ def uploaded_file(filename):
 def return_files_tut1():
 	try:
 		return send_file('current_report.rtf',
-                    attachment_filename='current_report.rtf', 
+                    download_name='current_report.rtf', 
                     as_attachment=True)
 	except Exception as e:
 		return str(e)
@@ -71,7 +71,7 @@ def return_files_tut1():
 def return_files_tut2():
 	try:
 		return send_file('data_list.csv',
-                    attachment_filename='data_list.csv', 
+                    download_name='data_list.csv', 
                     as_attachment=True)
 	except Exception as e:
 		return str(e)
@@ -80,7 +80,7 @@ def return_files_tut2():
 def return_files_tut3():
 	try:
 		return send_file('charge_list.csv',
-                    attachment_filename='charge_list.csv', 
+                    download_name='charge_list.csv', 
                     as_attachment=True)
 	except Exception as e:
 		return str(e)
@@ -89,7 +89,7 @@ def return_files_tut3():
 def return_files_tut4():
 	try:
 		return send_file('equip_charge_list.csv',
-                    attachment_filename='equip_charge_list.csv', 
+                    download_name='equip_charge_list.csv', 
                     as_attachment=True)
 	except Exception as e:
 		return str(e)

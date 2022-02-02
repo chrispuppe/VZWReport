@@ -36,8 +36,8 @@ vz_file='./uploads/' + vz_file
 # print vz_file
 
 
-file_read = csv.reader(open(vz_file, 'rb'), delimiter='\t')
-with open(vz_file, 'rb') as csv_file:
+file_read = csv.reader(open(vz_file, 'rt'), delimiter='\t')
+with open(vz_file, 'rt') as csv_file:
     lol = list(csv.reader(csv_file, delimiter='\t'))
     row_count = len(lol)
 # row_count = sum(1 for row in file_read)
@@ -75,7 +75,7 @@ charges_list = sorted(charges_list, key=itemgetter(1))
 # This adds titles to the table.
 charges_list.insert(0, charges_list_titles[0])
 
-with open(csv_charge_file, 'wb') as new_csv_charge_file:
+with open(csv_charge_file, 'wt') as new_csv_charge_file:
     wr = csv.writer(new_csv_charge_file, quoting=csv.QUOTE_ALL)
     wr.writerows(charges_list)
 
@@ -99,7 +99,7 @@ equip_charge_list = sorted(equip_charge_list, key=itemgetter(0))
 # This adds titles to the table.
 equip_charge_list.insert(0, equip_charge_list_titles[0])
 
-with open(csv_equip_file, 'wb') as new_equip_csv_file:
+with open(csv_equip_file, 'wt') as new_equip_csv_file:
     wr = csv.writer(new_equip_csv_file, quoting=csv.QUOTE_ALL)
     wr.writerows(equip_charge_list)
 
@@ -128,7 +128,7 @@ used_data_list = sorted(used_data_list, key=itemgetter(2), reverse=True)
 # This adds titles to the table.
 used_data_list.insert(0, used_data_list_titles[0])
 
-with open(csv_data_file, 'wb') as new_csv_charge_file:
+with open(csv_data_file, 'wt') as new_csv_charge_file:
     wr = csv.writer(new_csv_charge_file, quoting=csv.QUOTE_ALL)
     wr.writerows(used_data_list)
 
@@ -165,16 +165,15 @@ total_current_charges = 0
 
 # http://stackoverflow.com/questions/4128144/replace-string-within-file-contents
 def inplace_change(filename, old_string, new_string):
-    s = open(filename).read()
-    if old_string in s:
-        s = s.replace(old_string, new_string)
+    report = open(filename).read()
+    if old_string in report:
+        s = report.replace(old_string, new_string)
         f = open(filename, 'w')
         f.write(s)
         f.flush()
         f.close()
     else:
-        print 'No occurances of "{old_string}" found.'.format(
-            **locals())
+        print(f"No occurances of {old_string} found.")
 
 
 # Iterates over Column 'L' and Column 'V'
@@ -341,8 +340,8 @@ long_distance = ("{0:.2f}".format(long_distance))
 
 
 # Replace form place holders with live data.
-inplace_change(write_report, '<four_one_one_total>',
-               str(int(four_one_one_total)))
+# inplace_change(write_report, '<four_one_one_total>',
+#                str(int(four_one_one_total)))
 inplace_change(write_report, '<four_one_one>', str(four_one_one))
 inplace_change(write_report, '<msg_overages>', str(msg_overages))
 inplace_change(write_report, '<long_distance>', str(long_distance))
